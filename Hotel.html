@@ -1,0 +1,206 @@
+<html>
+
+<head>
+
+	<script>
+		var nomecli
+
+
+
+		bemvindo()
+		function bemvindo() {
+			var nomehotel = prompt("Digite o nome do Hotel: ");
+			var nomecli = prompt("Digite seu nome: ");
+			alert(`Bem Vindo ao ${nomehotel}, ${nomecli}. É um imenso prazer ter você por aqui`);
+			login()
+
+
+		}
+
+		function login() {
+			var senha = 2678;
+			var loginsenha = parseInt(prompt("Insira sua senha: "));
+
+
+
+			if (loginsenha != senha) {
+				alert("Senha Inválida! ")
+				login()
+
+			}
+
+		}
+
+
+
+		function inicio() {
+
+			var escolha = parseInt(prompt('Selecione uma opção 1.) Reserva de Quartos 2.) Cadastro de Hóspedes 3.) Abastecimento de Carros 4.) Sair'));
+
+			switch (escolha) {
+				case 1: reserva_quartos();
+					break;
+
+				case 2: cadastro_hospedes();
+					break;
+
+				case 3: abastecer_carros();
+					break;
+
+				case 4: erro();
+					break;
+
+				case 5: sair();
+					break;
+			}
+		}
+
+		function reserva_quartos() {
+
+			var valdiaria = parseInt(prompt("Qual o valor da diária?: "));
+			var days = prompt("Quantos dias?: ");
+
+			if (days <= 0) {
+				alert('Valor Inválido, tente novamente');
+			}
+
+			else if (days > 0 && days <= 30) {
+				var calc = days * valdiaria;
+				alert(`O valor de ${days} é de  ${calc}`)
+				var nomehosp = prompt('Qual o nome do hóspede?: ')
+
+				var validanom = prompt(`${nomecli} Você confirma essas hospedagens para ${nomehosp} por ${days} dias, digite S?N`)
+
+				if (validanom == "S" || validanom == "s") {
+					alert("Hospedagem de " + nomehosp + " foi realizada")
+				}
+				else {
+					alert("Operação cancelda");
+					reserva_quartos()
+				}
+			}
+
+			var opcao = prompt("Gostaria de continuar ? digite S/N");
+
+			if (opcao == 's' || opcao == 'S') {
+				reserva_quartos();
+			}
+			else {
+				inicio();
+			}
+		}
+
+		function cadastro_hospedes() {
+			
+			var lista_hospedes = [];
+
+
+			function sistema_cadastro() {
+
+				var chose_hospedes = parseInt(prompt('Cadastro de Hóspedes\n\n Selecione uma opção: \n1. Cadastrar \n2. Pesquisar \n3. Sair'))
+
+				switch (chose_hospedes) {
+					case 1:
+						cadastrar_hospedes();
+						break;
+
+					case 2:
+						pesquisar_hospedes();
+						break;
+
+					case 3:
+						inicio();
+						break;
+
+					default:
+						erro_search_hospedes();
+						break;
+				}
+			}
+		}
+
+		function cadastrar_hospedes() {
+		valorDiaria = parseFloat(prompt("Digite o valor padrão da diária!"));
+		gratuidade = 0;
+		meia = 0;
+		valorTotal_hosp = 0;
+		if (valorDiaria <= 0 || valorDiaria == isNaN) {
+			alert("Digite um valor válido!!!");
+			sistema_cadastro();
+		} else if (valorDiaria > 0) {
+			registerraHos();
+		}
+
+		function registerraHos() {
+			
+			if (lista_hospedes.length >= 15) {
+				alert("Numero máximo de hóspedes cadastrados.");
+
+			} else {
+				nome_hospede = prompt('Por favor, informe o nome da(o) hóspede:');
+				idade_hospede = parseInt(prompt("Digite a idade do hospede: "));
+
+				if (idade_hospede < 6) {
+					alert(`${nome_hospede}, possui gratuidade`);
+					gratuidade++;
+				} else if (idade_hospede >= 60) {
+					alert(`${nome_hospede}, paga meia!`);
+					meia++;
+					valorTotal_hosp += valorDiaria / 2;
+				} else {
+					valorTotal_hosp += valorDiaria;
+				}
+				
+				lista_hospedes.push(nome_hospede);
+				console.log(lista_hospedes);
+				alert("Sucesso! Hóspede " + nome_hospede + " foi cadastrada(o) com sucesso!\n");
+				sequencia();
+			}
+		}
+		function sequencia() {
+			continuar = prompt("Deseja cadastrar mais um hospede? digite uma das opções(SIM | PARE)");
+			if (continuar === "SIM" || continuar === "sim") {
+				registraHospedes();
+			} else if (continuar === "PARE" || continuar === "pare") {
+				alert(`${username}, o valor total das hospedagens é: R$ ${valorTotal_hosp}, ${gratuidade} gratuidade(s); ${meia} meia(s)`);
+				sistema_cadastrar_hospedes();
+			} else {
+				alert("Escolha uma opção valida!!");
+				sequencia();
+			}
+		}
+
+		sistema_cadastrar_hospedes();
+
+	}
+		
+
+		function abastecer_carros() {
+			alert('HOTEL' + nomehotel + 'ABASTECER');
+			inicio();
+		}
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 4');
+			inicio();
+		}
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+
+
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
